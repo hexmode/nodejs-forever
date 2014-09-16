@@ -1,7 +1,7 @@
 %define _binary_payload w9.gzdio
 %define logdir /var/log
-%define gitrepo https://github.com/hexmode/node-forever-rpm
-%define srcgit http://github.com/nodejitsu/forever
+%define gitrepo https://github.com/hexmode/nodejs-forever.git
+%define srcgit https://github.com/nodejitsu/forever.git
 %define git_checkout v0.11.1
 %define pkgname nodejs-forever
 %define instdir $RPM_BUILD_ROOT%{_libdir}/node_modules/%{pkgname}
@@ -13,11 +13,12 @@ Release: 1
 URL: http://github.com/nodejitsu/forever
 Vendor:  nodejitsu
 Packager: Mark A. Hershberger <mah@nichework.com>
-Source0: %{srcgit}
+Source0: %{gitrepo}
 License: MIT
 Group: System Environment/Daemons
 BuildRoot: %buildroot
 BuildArch: noarch
+BuildRequires: npm
 Requires: initscripts >= 8.36, node-forever
 Requires(post): chkconfig
 Requires(pre): /usr/sbin/useradd
@@ -37,7 +38,8 @@ if [ ! -d $RPM_SOURCE_DIR/%{pkgname} ]; then
 fi
 
 mkdir -p %{instdir}
-rm -rf %{instdir}/tests
+cd $RPM_SOURCE_DIR/%{pkgname}
+npm install
 cp -pr $RPM_SOURCE_DIR/%{pkgname}/node_modules %{instdir}
 
 %pre
