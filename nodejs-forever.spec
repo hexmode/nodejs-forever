@@ -19,7 +19,7 @@ Group: System Environment/Daemons
 BuildRoot: %buildroot
 BuildArch: noarch
 BuildRequires: npm
-Requires: initscripts >= 8.36, node-forever
+Requires: initscripts >= 8.36, npm
 Requires(post): chkconfig
 Requires(pre): /usr/sbin/useradd
 
@@ -39,8 +39,8 @@ fi
 
 mkdir -p %{instdir}
 cd $RPM_SOURCE_DIR/%{pkgname}
-npm install
-cp -pr $RPM_SOURCE_DIR/%{pkgname}/node_modules %{instdir}
+npm config set prefix=$RPM_BUILD_ROOT/usr
+npm install -g
 
 %pre
 # noop
@@ -62,6 +62,9 @@ cp -pr $RPM_SOURCE_DIR/%{pkgname}/node_modules %{instdir}
 
 %files
 %defattr(-,root,root,-)
+
+/usr/bin
+%{_libdir}
 
 
 
