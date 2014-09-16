@@ -1,6 +1,6 @@
 %define _binary_payload w9.gzdio
 %define logdir /var/log
-%define gitrepo https://github.com/hexmode/nodejs-forever.git
+%define gitrepo https://github.com/hexmode/nodejs-forever
 %define srcgit https://github.com/nodejitsu/forever.git
 %define git_checkout v0.11.1
 %define pkgname nodejs-forever
