@@ -42,6 +42,8 @@ cd $RPM_SOURCE_DIR/%{pkgname}
 npm config set prefix=$RPM_BUILD_ROOT/usr
 npm install -g
 
+ln -s ../../../../etc/parsoid/LocalSetttings.js $RPM_BUILD_ROOT/usr/lib/node_modules/parsoid
+
 %pre
 # noop
 
